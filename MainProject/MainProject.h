@@ -1,6 +1,7 @@
 #pragma once
 #include "pch.h"
 using namespace std;
+
 namespace pm::types
 {
 	struct User
