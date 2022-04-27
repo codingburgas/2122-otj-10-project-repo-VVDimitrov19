@@ -2,7 +2,7 @@
 #include "pch.h"
 using namespace std;
 
-namespace pm::types
+namespace pm::type
 {
 	struct User
 	{
