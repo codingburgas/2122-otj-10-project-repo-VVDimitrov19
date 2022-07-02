@@ -3,11 +3,11 @@
 #include<istream>
 #include<fstream>
 #include<stdlib.h>
-#include<string.h>
+#include<string>
 #include<Windows.h>
+#include<algorithm>
 #include"MainMenu.h"
 using namespace std;
-
 
 void setPosition(short a, short b)
 {
@@ -20,11 +20,20 @@ void setPosition(short a, short b)
 
 }
 
+string hashPassword(string pass) {
+    string hashed(pass);
+
+    transform(hashed.begin(), hashed.end(), hashed.begin(), [](char& i) {
+        return i ^= 15;
+        });
+
+    return hashed;
+}
 
 void login()
 {
     int count = 0;
-    string user, pass, u, p;
+    string user, hashedPass, u, p;
     system("cls");
     setPosition(43, 7);
     cout << "         -- ";
@@ -50,12 +59,14 @@ void login()
     setPosition(55, 10);
     cin >> user;
     setPosition(55, 12);
-    cin >> pass;
+    cin >> hashedPass;
+
+    hashedPass = hashPassword(hashedPass);
 
     ifstream input("database.txt");
     while (input >> u >> p)
     {
-        if (u == user && p == pass)
+        if (u == user && p == hashedPass)
 
         {
             count = 1;
@@ -81,10 +92,10 @@ void login()
 void registr()
 {
     system("cls");
-    string reguser, regpass, ru, rp;
+    string reguser, hashedRegpass, ru, rp;
     setPosition(43, 7);
     cout << "        -- ";
-    cout << "REGISTER ";
+    cout << "Register ";
     cout << "--        " << endl;
     setPosition(43, 8);
     cout << " ---------------------------- " << endl;
@@ -107,10 +118,12 @@ void registr()
     cin >> reguser;
 
     setPosition(55, 12);
-    cin >> regpass;
+    cin >> hashedRegpass;
+
+    hashedRegpass = hashPassword(hashedRegpass);
 
     fstream reg("database.txt", ios::app);
-    reg << reguser << ' ' << regpass << endl;
+    reg << reguser << ' ' << hashedRegpass << endl;
     system("cls");
     cout << "\nRegistration Sucessful\n";
     cout << "Redirecting you to the Login Menu";
@@ -124,6 +137,10 @@ void registr()
 void forgot()
 {
     system("cls");
+    setPosition(26, 5);
+    cout << "        -- ";
+    cout << "ForgotDetails ";
+    cout << "--        " << endl;
     setPosition(30, 6);
     cout << "---------------------------" << endl;
     setPosition(30, 7);
@@ -214,7 +231,7 @@ void forgot()
                 if (count == 1)
                 {
                     cout << "\n\nHurray, account found\n";
-                    cout << "\nYour password is " << sp;
+                    cout << "\nYour password is " << hashPassword(sp);
                     cin.get();
                     cin.get();
                     system("cls");
@@ -241,7 +258,7 @@ void forgot()
                 ifstream searchp("database.txt");
                 while (searchp >> su2 >> sp2)
                 {
-                    if (sp2 == searchpass)
+                    if (sp2 == hashPassword(searchpass))
                     {
                         count = 1;
                     }
@@ -281,93 +298,118 @@ void forgot()
     }
 }
 
-    void mainMenu()
+void showUsers()
+{
+
+    fstream myFile;
+    string text;
+    myFile.open("database.txt");
+
+    while (getline(myFile, text))
     {
-        setPosition(30, 6);
-        cout << "-------------------------" << endl;
-        setPosition(30, 7);
-        cout << "|" << endl;
-        setPosition(30, 8);
-        cout << "|" << endl;
-        setPosition(30, 9);
-        cout << "|" << endl;
-        setPosition(30, 10);
-        cout << "|" << endl;
-        setPosition(30, 11);
-        cout << "|" << endl;
-        setPosition(30, 12);
-        cout << "|" << endl;
-        setPosition(30, 13);
-        cout << "|" << endl;
-        setPosition(30, 14);
-        cout << "|" << endl;
-        setPosition(54, 7);
-        cout << "|" << endl;
-        setPosition(54, 8);
-        cout << "|" << endl;
-        setPosition(54, 9);
-        cout << "|" << endl;
-        setPosition(54, 10);
-        cout << "|" << endl;
-        setPosition(54, 11);
-        cout << "|" << endl;
-        setPosition(54, 12);
-        cout << "|" << endl;
-        setPosition(54, 13);
-        cout << "|" << endl;
-        setPosition(54, 14);
-        cout << "|" << endl;
-        setPosition(30, 15);
-        cout << "-------------------------" << endl;
-        setPosition(37, 9);
-        cout << "Login";
-        setPosition(37, 10);
-        cout << "Register";
-        setPosition(37, 11);
-        cout << "ForgetDetails";
+        cout << text << endl;
+    }
 
-        int y = 9, choice = 0;
 
-        while (true) {
-            system("pause>nul");
+}
 
-            if (GetAsyncKeyState(VK_DOWN) && y != 13) {
-                setPosition(33, y);
-                cout << "  ";
-                y++;
-                setPosition(33, y);
-                cout << "-> ";
-                choice++;
-                continue;
+void mainMenu()
+{
+    setPosition(27, 5);
+    cout << "        -- ";
+    cout << "MainMenu ";
+    cout << "--        " << endl;
+    setPosition(30, 6);
+    cout << "-------------------------" << endl;
+    setPosition(30, 7);
+    cout << "|" << endl;
+    setPosition(30, 8);
+    cout << "|" << endl;
+    setPosition(30, 9);
+    cout << "|" << endl;
+    setPosition(30, 10);
+    cout << "|" << endl;
+    setPosition(30, 11);
+    cout << "|" << endl;
+    setPosition(30, 12);
+    cout << "|" << endl;
+    setPosition(30, 13);
+    cout << "|" << endl;
+    setPosition(30, 14);
+    cout << "|" << endl;
+    setPosition(54, 7);
+    cout << "|" << endl;
+    setPosition(54, 8);
+    cout << "|" << endl;
+    setPosition(54, 9);
+    cout << "|" << endl;
+    setPosition(54, 10);
+    cout << "|" << endl;
+    setPosition(54, 11);
+    cout << "|" << endl;
+    setPosition(54, 12);
+    cout << "|" << endl;
+    setPosition(54, 13);
+    cout << "|" << endl;
+    setPosition(54, 14);
+    cout << "|" << endl;
+    setPosition(30, 15);
+    cout << "-------------------------" << endl;
+    setPosition(37, 9);
+    cout << "Login";
+    setPosition(37, 10);
+    cout << "Register";
+    setPosition(37, 11);
+    cout << "ForgotDetails";
+    setPosition(37, 12);
+    cout << "ShowUsers";
+
+    int y = 9, choice = 0;
+
+    while (true) {
+        system("pause>nul");
+
+        if (GetAsyncKeyState(VK_DOWN) && y != 13) {
+            setPosition(33, y);
+            cout << "  ";
+            y++;
+            setPosition(33, y);
+            cout << "-> ";
+            choice++;
+            continue;
+        }
+
+        if (GetAsyncKeyState(VK_UP) && y != 9) {
+            setPosition(33, y);
+            cout << "  ";
+            y--;
+            setPosition(33, y);
+            cout << "-> ";
+            choice--;
+            continue;
+        }
+
+        if (GetAsyncKeyState(VK_RETURN)) {
+            switch (choice) {
+            case 0:
+                system("cls");
+                login();
+                break;
+            case 1:
+                system("cls");
+                registr();
+                break;
+            case 2:
+                system("cls");
+                forgot();
+                break;
+            case 3:
+                system("cls");
+                showUsers();
+                break;
             }
 
-            if (GetAsyncKeyState(VK_UP) && y != 9) {
-                setPosition(33, y);
-                cout << "  ";
-                y--;
-                setPosition(33, y);
-                cout << "-> ";
-                choice--;
-                continue;
-            }
-
-            if (GetAsyncKeyState(VK_RETURN)) {
-                switch (choice) {
-                case 0:
-                    system("cls");
-                    login();
-                    break;
-                case 1:
-                    system("cls");
-                    registr();
-                    break;
-                case 2:
-                    system("cls");
-                    forgot();
-                    break;
-                }
-
-            }
         }
     }
+}
 
