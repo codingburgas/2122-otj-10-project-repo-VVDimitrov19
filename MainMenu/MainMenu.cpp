@@ -26,23 +26,30 @@ void login()
     int count = 0;
     string user, pass, u, p;
     system("cls");
+    setPosition(43, 7);
     cout << "         -- ";
     cout << "Login";
     cout << " --          " << endl;
+    setPosition(43, 8);
     cout << " ---------------------------- " << endl;
+    setPosition(43, 9);
     cout << "|          ";
     cout << "Username: "; 
     cout << "        | " << endl;
+    setPosition(43, 10);
     cout << "|         ->                 |" << endl;
+    setPosition(43, 11);
     cout << "|          ";
     cout << "Password: "; 
     cout << "        | " << endl;
+    setPosition(43, 12);
     cout << "|         ->                 |" << endl;
+    setPosition(43, 13);
     cout << " ---------------------------- " << endl;
     
-    setPosition(12, 3);
+    setPosition(55, 10);
     cin >> user;
-    setPosition(12, 5);
+    setPosition(55, 12);
     cin >> pass;
 
     ifstream input("database.txt");
@@ -75,24 +82,31 @@ void registr()
 {
     system("cls");
     string reguser, regpass, ru, rp;
+    setPosition(43, 7);
     cout << "        -- ";
     cout << "REGISTER ";
     cout << "--        " << endl;
+    setPosition(43, 8);
     cout << " ---------------------------- " << endl;
+    setPosition(43, 9);
     cout << "|          ";
     cout << "Username: ";
     cout << "        | " << endl;
+    setPosition(43, 10);
     cout << "|         ->                 |" << endl;
+    setPosition(43, 11);
     cout << "|          ";
     cout << "Password: ";
     cout << "        | " << endl;
+    setPosition(43, 12);
     cout << "|         ->                 |" << endl;
+    setPosition(43, 13);
     cout << " ---------------------------- " << endl;
 
-    setPosition(12, 3);
+    setPosition(55, 10);
     cin >> reguser;
 
-    setPosition(12, 5);
+    setPosition(55, 12);
     cin >> regpass;
 
     fstream reg("database.txt", ios::app);
@@ -110,59 +124,69 @@ void registr()
 void forgot()
 {
     system("cls");
-    cout << "------------------------" << endl;
+    setPosition(30, 6);
+    cout << "---------------------------" << endl;
+    setPosition(30, 7);
     cout << "|" << endl;
+    setPosition(30, 8);
     cout << "|" << endl;
+    setPosition(30, 9);
     cout << "|" << endl;
+    setPosition(30, 10);
     cout << "|" << endl;
+    setPosition(30, 11);
     cout << "|" << endl;
+    setPosition(30, 12);
     cout << "|" << endl;
+    setPosition(30, 13);
     cout << "|" << endl;
+    setPosition(30, 14);
     cout << "|" << endl;
-    setPosition(23, 1);
+    setPosition(56, 7);
     cout << "|" << endl;
-    setPosition(23, 2);
+    setPosition(56, 8);
     cout << "|" << endl;
-    setPosition(23, 3);
+    setPosition(56, 9);
     cout << "|" << endl;
-    setPosition(23, 4);
+    setPosition(56, 10);
     cout << "|" << endl;
-    setPosition(23, 5);
+    setPosition(56, 11);
     cout << "|" << endl;
-    setPosition(23, 6);
+    setPosition(56, 12);
     cout << "|" << endl;
-    setPosition(23, 7);
+    setPosition(56, 13);
     cout << "|" << endl;
-    setPosition(23, 8);
+    setPosition(56, 14);
     cout << "|" << endl;
-    cout << "------------------------" << endl;
-    setPosition(3, 3);
+    setPosition(30, 15);
+    cout << "---------------------------" << endl;
+    setPosition(35, 9);
     cout << " Search by username" << endl;
-    setPosition(3, 4);
+    setPosition(35, 10);
     cout << " Search by password" << endl;
-    setPosition(3, 5);
+    setPosition(35, 11);
     cout << " Main menu" << endl;
 
-    int y = 3, choice = 0;
+    int y = 9, choice = 0;
 
     while (true) {
         system("pause>nul");
 
         if (GetAsyncKeyState(VK_DOWN) && y != 13) {
-            setPosition(1, y);
+            setPosition(32, y);
             cout << "  ";
             y++;
-            setPosition(1, y);
+            setPosition(32, y);
             cout << "-> ";
             choice++;
             continue;
         }
 
         if (GetAsyncKeyState(VK_UP) && y != 9) {
-            setPosition(1, y);
+            setPosition(32, y);
             cout << "  ";
             y--;
-            setPosition(1, y);
+            setPosition(32, y);
             cout << "-> ";
             choice--;
             continue;
@@ -259,59 +283,69 @@ void forgot()
 
     void mainMenu()
     {
-        cout << "----------------------" << endl;
+        setPosition(30, 6);
+        cout << "-------------------------" << endl;
+        setPosition(30, 7);
         cout << "|" << endl;
+        setPosition(30, 8);
         cout << "|" << endl;
+        setPosition(30, 9);
         cout << "|" << endl;
+        setPosition(30, 10);
         cout << "|" << endl;
+        setPosition(30, 11);
         cout << "|" << endl;
+        setPosition(30, 12);
         cout << "|" << endl;
+        setPosition(30, 13);
         cout << "|" << endl;
+        setPosition(30, 14);
         cout << "|" << endl;
-        setPosition(21, 1);
+        setPosition(54, 7);
         cout << "|" << endl;
-        setPosition(21, 2);
+        setPosition(54, 8);
         cout << "|" << endl;
-        setPosition(21, 3);
+        setPosition(54, 9);
         cout << "|" << endl;
-        setPosition(21, 4);
+        setPosition(54, 10);
         cout << "|" << endl;
-        setPosition(21, 5);
+        setPosition(54, 11);
         cout << "|" << endl;
-        setPosition(21, 6);
+        setPosition(54, 12);
         cout << "|" << endl;
-        setPosition(21, 7);
+        setPosition(54, 13);
         cout << "|" << endl;
-        setPosition(21, 8);
+        setPosition(54, 14);
         cout << "|" << endl;
-        cout << "----------------------" << endl;
-        setPosition(5, 3);
-        cout << "Login" << endl;
-        setPosition(5, 4);
+        setPosition(30, 15);
+        cout << "-------------------------" << endl;
+        setPosition(37, 9);
+        cout << "Login";
+        setPosition(37, 10);
         cout << "Register";
-        setPosition(5, 5);
-        cout << "ForgotPassword";
+        setPosition(37, 11);
+        cout << "ForgetDetails";
 
-        int y = 3, choice = 0;
+        int y = 9, choice = 0;
 
         while (true) {
             system("pause>nul");
 
             if (GetAsyncKeyState(VK_DOWN) && y != 13) {
-                setPosition(1, y);
+                setPosition(33, y);
                 cout << "  ";
                 y++;
-                setPosition(1, y);
+                setPosition(33, y);
                 cout << "-> ";
                 choice++;
                 continue;
             }
 
             if (GetAsyncKeyState(VK_UP) && y != 9) {
-                setPosition(1, y);
+                setPosition(33, y);
                 cout << "  ";
                 y--;
-                setPosition(1, y);
+                setPosition(33, y);
                 cout << "-> ";
                 choice--;
                 continue;
