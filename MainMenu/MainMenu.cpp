@@ -30,6 +30,29 @@ string hashPassword(string pass) {
     return hashed;
 }
 
+bool hasDuplicates(string username, string password)
+{
+    ifstream fi;
+    string uname, pass;
+
+    fi.open("database.txt", ios::in);
+
+    if (fi.fail())
+        return false;
+
+    while (fi >> uname >> pass) {
+        if (uname == username && pass == password) {
+            fi.close();
+            return true;
+        }
+    }
+
+    fi.close();
+
+    return false;
+    
+}
+
 void login()
 {
     int count = 0;
@@ -91,6 +114,7 @@ void login()
 
 void registr()
 {
+    Beggining:
     system("cls");
     string reguser, hashedRegpass, ru, rp;
     setPosition(43, 7);
@@ -122,15 +146,25 @@ void registr()
 
     hashedRegpass = hashPassword(hashedRegpass);
 
-    fstream reg("database.txt", ios::app);
-    reg << reguser << ' ' << hashedRegpass << endl;
-    system("cls");
-    cout << "\nRegistration Sucessful\n";
-    cout << "Redirecting you to the Login Menu";
-    Sleep(1000);
-    system("cls");
+    if (hasDuplicates(reguser, hashedRegpass) == true)
+    {
+        system("cls");
+        cout << "This password already exists!" << endl;
+        Sleep(1000);
+        goto Beggining;
+    }
+    else
+    {
+        fstream reg("database.txt", ios::app);
+        reg << reguser << ' ' << hashedRegpass << endl;
+        system("cls");
+        cout << "\nRegistration Sucessful\n";
+        cout << "Redirecting you to the Login Menu";
+        Sleep(1000);
+        system("cls");
 
-    login();
+        login();
+    }
 
 }
 
