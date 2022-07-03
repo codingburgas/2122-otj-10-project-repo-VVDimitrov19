@@ -9,6 +9,10 @@
 #include"MainMenu.h"
 using namespace std;
 
+string currentUser, currentPassword;
+string reguser, hashedRegpass, ru, rp;
+string user, hashedPass, u, p;
+
 void setPosition(short a, short b)
 {
     COORD coordinates;
@@ -56,7 +60,6 @@ bool hasDuplicates(string username, string password)
 void login()
 {
     int count = 0;
-    string user, hashedPass, u, p;
     system("cls");
     setPosition(43, 7);
     cout << "         -- ";
@@ -102,12 +105,15 @@ void login()
         cout << "Hello " << user << "\nLOGIN SUCESS\nWe're glad that you're here.\nThanks for logging in\n";
         cin.get();
         cin.get();
+        currentUser = user;
+        currentPassword = hashedPass;
         system("cls");
 
         mainMenu();
     }
     else
     {
+        system("cls");
         cout << "\nLOGIN ERROR\nPlease check your username and password\n";
     }
 }
@@ -116,7 +122,6 @@ void registr()
 {
     Beggining:
     system("cls");
-    string reguser, hashedRegpass, ru, rp;
     setPosition(43, 7);
     cout << "        -- ";
     cout << "Register ";
@@ -189,10 +194,6 @@ void forgot()
     cout << "|" << endl;
     setPosition(30, 12);
     cout << "|" << endl;
-    setPosition(30, 13);
-    cout << "|" << endl;
-    setPosition(30, 14);
-    cout << "|" << endl;
     setPosition(56, 7);
     cout << "|" << endl;
     setPosition(56, 8);
@@ -205,11 +206,7 @@ void forgot()
     cout << "|" << endl;
     setPosition(56, 12);
     cout << "|" << endl;
-    setPosition(56, 13);
-    cout << "|" << endl;
-    setPosition(56, 14);
-    cout << "|" << endl;
-    setPosition(30, 15);
+    setPosition(30, 13);
     cout << "---------------------------" << endl;
     setPosition(35, 9);
     cout << " Search by username" << endl;
@@ -347,6 +344,8 @@ void showUsers()
 
 }
 
+
+
 void mainMenu()
 {
     setPosition(27, 5);
@@ -397,6 +396,8 @@ void mainMenu()
     cout << "ForgotDetails";
     setPosition(37, 12);
     cout << "ShowUsers";
+    setPosition(37, 13);
+    cout << "Exit";
 
     int y = 9, choice = 0;
 
@@ -440,6 +441,10 @@ void mainMenu()
             case 3:
                 system("cls");
                 showUsers();
+                break;
+            case 4:
+                system("cls");
+                cout << "Thank you for using this program!";
                 break;
             }
 
