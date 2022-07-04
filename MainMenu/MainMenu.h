@@ -3,10 +3,6 @@
 
 void setPosition(short a, short b);
 
-string hashPassword(string pass);
-
-bool hasDuplicates(string username, string password);
-
 void login();
 
 void registr();
