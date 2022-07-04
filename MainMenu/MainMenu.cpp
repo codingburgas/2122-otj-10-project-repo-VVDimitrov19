@@ -13,6 +13,8 @@ string currentUser, currentPassword;
 string reguser, hashedRegpass, ru, rp;
 string user, hashedPass, u, p;
 
+bool check = false;
+
 void setPosition(short a, short b)
 {
     COORD coordinates;
@@ -108,6 +110,7 @@ void login()
         currentUser = user;
         currentPassword = hashedPass;
         system("cls");
+        check = true;
 
         mainMenu();
     }
@@ -331,17 +334,24 @@ void forgot()
 
 void showUsers()
 {
-
-    fstream myFile;
-    string text;
-    myFile.open("database.txt");
-
-    while (getline(myFile, text))
+    if (check == true)
     {
-        cout << text << endl;
+        fstream myFile;
+        string text;
+        myFile.open("database.txt");
+
+        while (getline(myFile, text))
+        {
+            cout << text << endl;
+        }
     }
-
-
+    else
+    {
+        cout << "You must sign in first" << endl;
+        Sleep(1000);
+        system("cls");
+        login();
+    }
 }
 
 
@@ -444,7 +454,7 @@ void mainMenu()
                 break;
             case 4:
                 system("cls");
-                cout << "Thank you for using this program!";
+                cout << "Goodbye!";
                 break;
             }
 
